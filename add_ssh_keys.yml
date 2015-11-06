@@ -1,0 +1,11 @@
+---
+
+- hosts: pies
+  remote_user: pi
+  tasks:
+  - name: Copy authorized_keys.base to authorized_keys
+    shell: cat /home/pi/.ssh/authorized_keys.base > /home/pi/.ssh/authorized_keys
+  - name: Synchronise SSH keys
+    shell: echo {{ lookup('file', item) }} >> /home/pi/.ssh/authorized_keys
+    with_fileglob:
+      - ./keys/*

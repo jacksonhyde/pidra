@@ -1,0 +1,12 @@
+---
+
+- hosts: pies
+  remote_user: pi
+  vars:
+    timeout: 3600
+  tasks:
+  - name: Reboot all the pies
+    command: shutdown -r now "Reboot triggered by Ansible"
+    async: 0
+    poll: 0
+    ignore_errors: true
